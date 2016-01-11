@@ -1,7 +1,5 @@
 package de.th.wildau.hadoop;
-import com.google.gson.JsonArray;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -21,6 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
 /**
  *
  * @author Philipp
+ * @subject: Wie viele Fahrzeuge stehen am 31.12.2014 um 23:58 in Berlin zur Verfuegung? 
  */
 public class JobOne {
 
@@ -33,13 +32,14 @@ public class JobOne {
                             
             try
             {
-                JSONObject jsonObj = new JSONObject(value.toString());
-                JSONArray placemark = jsonObj.getJSONArray("placemarks");
-                
                 String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();
                    
                 if(fileName.equals("2014-12-31-23-58-00-Berlin.json"))
                 {
+                    
+                    JSONObject jsonObj = new JSONObject(value.toString());
+                    JSONArray placemark = jsonObj.getJSONArray("placemarks");
+                
                     for(int i=0; i < placemark.length();i++)
                     {
                         JSONObject place = (JSONObject) placemark.get(i);

@@ -1,7 +1,5 @@
 package de.th.wildau.hadoop;
-import com.google.gson.JsonArray;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -21,6 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
 /**
  *
  * @author Philipp
+ * @subject Zu welcher Zeit stehen die meisten Fahrzeuge in Hamburg zur Verfuegung?
  */
 public class JobTwoExtended {
 
@@ -38,11 +37,11 @@ public class JobTwoExtended {
                 
                 String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();
                    
-                if(fileName.contains("Berlin"))
+                if(fileName.contains("Hamburg"))
                 {
                     for(int i=0; i < placemark.length();i++)
                     {
-                        word.set(fileName.replace("-Berlin.json", ""));
+                        word.set(fileName.replace("-Hamburg.json", ""));
                         context.write(word, one);
                     }
                 }
@@ -65,9 +64,20 @@ public class JobTwoExtended {
             if(sum > maxCount)
             {
                 maxCount = sum;
-                maxTime = key.toString();
+                
+                String name = key.toString();
+                char[] array = new char[name.length()];
+
+                for (int i = 0; i < array.length; i++ ){
+                if(i == 4 || i== 7){            array[i] = ".".charAt(0);
+                }else if( i == 10){             array[i] = " ".charAt(0);
+                }else if( i == 13){             array[i] = ":".charAt(0);
+                }else if( i >= 16 && i<=19){    array[i] = " ".charAt(0);
+                }else{                          array[i] = name.charAt(i); }
+                }
+                
+                maxTime = new String(array);
             }
-            
             
             result.set(maxCount);
             key.set(maxTime);

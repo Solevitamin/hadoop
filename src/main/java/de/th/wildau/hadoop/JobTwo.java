@@ -1,7 +1,5 @@
 package de.th.wildau.hadoop;
-import com.google.gson.JsonArray;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -21,6 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
 /**
  *
  * @author Philipp
+ * @subject Zu welcher Zeit stehen die meisten Fahrzeuge in Hamburg zur Verfuegung?
  */
 public class JobTwo {
 
@@ -38,11 +37,11 @@ public class JobTwo {
                 
                 String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();
                    
-                if(fileName.contains("Berlin"))
+                if(fileName.contains("Hamburg"))
                 {
                     for(int i=0; i < placemark.length();i++)
                     {
-                        word.set(fileName.replace("-Berlin.json", ""));
+                        word.set(fileName.replace("-Hamburg.json", ""));
                         context.write(word, one);
                     }
                 }
@@ -68,7 +67,7 @@ public class JobTwo {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if (otherArgs.length < 2) {
-            System.err.println("Usage: count vihicle in Berlin <in> [<in>...] <out>");
+            System.err.println("Usage: count vihicle in Hamburg <in> [<in>...] <out>");
             System.exit(2);
         }
 

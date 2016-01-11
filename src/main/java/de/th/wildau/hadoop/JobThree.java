@@ -17,6 +17,8 @@ import org.apache.hadoop.util.GenericOptionsParser;
 /**
  *
  * @author Philipp
+ * @subject: Wie oft wurde in diesem Zeitraum ein bestimmtes Auto bewegt?
+ * 
  */
 public class JobThree {
 
