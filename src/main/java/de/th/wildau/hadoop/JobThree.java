@@ -58,7 +58,6 @@ public class JobThree {
                 sum += val.get();
             }            
             result.set(sum);
-            
             context.write(key, result);
         }
     }

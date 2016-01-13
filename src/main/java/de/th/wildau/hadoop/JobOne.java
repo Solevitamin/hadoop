@@ -62,7 +62,7 @@ public class JobOne {
             }
             
             result.set(sum);
-            key.set("Anzahl Fahrzeuge: ");
+            key.set("Anzahl freier Fahrzeuge in Berlin: ");
             context.write(key, result);
         }
     }
